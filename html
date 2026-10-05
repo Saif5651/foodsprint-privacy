@@ -1,1 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Foodsprint</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, 'SF Pro Arabic', 'Arial', sans-serif;
+            background: #0a0e27;
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        h1 { color: #4A90FF; font-size: 28px; margin-bottom: 10px; }
+        .app-name { color: #4A90FF; font-size: 16px; margin-bottom: 6px; }
+        .developer-name { color: #aaa; font-size: 14px; margin-bottom: 30px; }
+        h2 {
+            color: #4A90FF; font-size: 20px;
+            margin-top: 30px; margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(74,144,255,0.2);
+        }
+        p, li { margin-bottom: 10px; color: #ccc; }
+        ul { padding-inline-start: 25px; margin-bottom: 15px; }
+        .update-date { color: #888; font-size: 14px; margin-top: 30px; text-align: center; }
+        a { color: #4A90FF; }
+        .lang-selector {
+            position: fixed; top: 16px; right: 16px;
+            background: rgba(74,144,255,0.15);
+            border: 1px solid rgba(74,144,255,0.4);
+            border-radius: 10px; padding: 6px 12px;
+            color: #4A90FF; font-size: 13px; cursor: pointer;
+            backdrop-filter: blur(10px); z-index: 100;
+        }
+        .lang-selector select {
+            background: transparent; border: none;
+            color: #4A90FF; font-size: 13px; cursor: pointer;
+            outline: none;
+        }
+        .lang-selector select option { background: #0a0e27; color: #e0e0e0; }
+    </style>
+</head>
+<body>
+<div class="lang-selector">
+    🌐 <select id="langPicker" onchange="switchLang(this.value)"></select>
+</div>
+<div class="container" id="content"></div>
 
+<script>
+const T = {
+  ar: {
+    dir:'rtl', lang:'ar', langName:'العربية',
+    title:'سياسة الخصوصية - Foodsprint',
+    h1:'سياسة الخصوصية',
+    subtitle:'Foodsprint - مساعد التغذية الذكي',
+    developer:'المطور:Saif',
+    s1:'مقدمة',
+    p1:'نحن في Foodsprint نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية. توضح هذه السياسة كيفية جمع واستخدام وحماية معلوماتك.',
+    s2:'البيانات التي نجمعها',
+    l2:['معلومات الحساب: الاسم والبريد الإلكتروني عند إنشاء حسابك.','بيانات التغذية والصحة: معلومات الوجبات والسعرات الحرارية والعناصر الغذائية.','الصور: صور الطعام لتحليل الوجبات.','بيانات المشتريات: معلومات الاشتراكات (تتم معالجتها عبر Apple/Google وRevenueCat).','بيانات الاستخدام: كيفية تفاعلك مع التطبيق لتحسين تجربة المستخدم.','بيانات الأعطال: تقارير تقنية مجهولة الهوية لتحسين الأداء.'],
+    s3:'كيف نستخدم بياناتك',
+    l3:['تقديم خدمة تحليل الوجبات والتغذية.','إدارة حسابك والتحقق من هويتك.','معالجة الاشتراكات والمشتريات.','تخصيص تجربتك وعرض ملخصات التغذية.','تحسين أداء التطبيق وإصلاح الأعطال.'],
+    s4:'مشاركة البيانات',
+    p4:'لا نبيع بياناتك الشخصية. قد نشارك بياناتك فقط مع:',
+    l4:['مزودي الخدمات: مثل خدمات الذكاء الاصطناعي وRevenueCat لإدارة الاشتراكات.','المتطلبات القانونية: عند الضرورة للامتثال للقوانين.'],
+    s5:'حماية البيانات',
+    p5:'نستخدم إجراءات أمنية لحماية بياناتك بما في ذلك التشفير أثناء النقل والتخزين الآمن.',
+    s6:'حقوقك',
+    l6:['طلب الوصول إلى بياناتك الشخصية.','طلب تصحيح أو حذف بياناتك.','سحب موافقتك على معالجة البيانات.','حذف حسابك وجميع البيانات المرتبطة به.'],
+    s7:'بيانات الأطفال',
+    p7:'التطبيق غير موجه للأطفال دون سن 13 عامًا ولا نجمع بياناتهم.',
+    s8:'التغييرات على هذه السياسة',
+    p8:'قد نحدّث هذه السياسة من وقت لآخر وسنخطرك بأي تغييرات جوهرية عبر التطبيق.',
+    sAds:'الإعلانات',
+    pAds:'يعرض Foodsprint إعلانات عبر Meta Audience Network لمستخدمي الخطة المجانية فقط؛ المشتركون لا يشاهدون أي إعلانات. قد تستخدم Meta مُعرّفات الجهاز وتقنيات مشابهة لعرض الإعلانات وقياسها، وقد يشمل ذلك إعلانات مخصصة بناءً على نشاطك. على iOS نطلب إذنك عبر نظام App Tracking Transparency الخاص بآبل قبل أي تتبّع عبر التطبيقات. في جميع الحالات نطلب موافقتك الصريحة عبر نافذة الموافقة داخل التطبيق قبل تهيئة أي خدمة إعلانات، ويمكنك تغيير اختيارك في أي وقت من الإعدادات ← خيارات خصوصية الإعلانات. اطّلع على سياسة خصوصية Meta عبر www.facebook.com/privacy/policy/.',
+    s9:'تواصل معنا',
+    p9:'إذا كان لديك أي استفسارات، تواصل معنا:',
+    email:'support@dietsai.com',
+    updated:'آخر تحديث: مارس 2026'
+  },
+  en: {
+    dir:'ltr', lang:'en', langName:'English',
+    title:'Privacy Policy - Foodsprint',
+    h1:'Privacy Policy',
+    subtitle:'Foodsprint - AI Nutrition Assistant',
+    developer:'Developer: Issa Alhilali',
+    s1:'Introduction',
+    p1:'At Foodsprint, we respect your privacy and are committed to protecting your personal data. This policy explains how we collect, use, and protect your information when you use our app.',
+    s2:'Data We Collect',
+    l2:['Account Information: Name and email address when you create an account.','Nutrition & Health Data: Meal information, calories, and nutrients analyzed through the app.','Photos: Food images you capture for meal analysis.','Purchase Data: Subscription and in-app purchase information (processed via Apple/Google and RevenueCat).','Usage Data: How you interact with the app to improve user experience.','Crash Data: Anonymous technical reports to improve app performance.'],
+    s3:'How We Use Your Data',
+    l3:['Provide meal analysis and nutrition services.','Manage your account and verify your identity.','Process subscriptions and purchases.','Personalize your experience and show your nutrition summaries.','Improve app performance and fix bugs.'],
+    s4:'Data Sharing',
+    p4:'We do not sell your personal data. We may share your data only with:',
+    l4:['Service Providers: Such as AI services for meal analysis and RevenueCat for subscription management.','Legal Requirements: When necessary to comply with applicable laws.'],
+    s5:'Data Protection',
+    p5:'We use appropriate security measures to protect your data, including encryption during transmission and secure storage.',
+    s6:'Your Rights',
+    l6:['Request access to your personal data.','Request correction or deletion of your data.','Withdraw consent for data processing.','Delete your account and all associated data.'],
+    s7:"Children's Data",
+    p7:'Our app is not intended for children under 13 and we do not knowingly collect data from children.',
+    s8:'Changes to This Policy',
+    p8:'We may update this policy from time to time and will notify you of any material changes through the app.',
+    sAds:'Advertising',
+    pAds:'Foodsprint shows ads via Meta Audience Network to users on the free plan only; subscribers see no ads. Meta may use device identifiers and similar technologies to serve and measure ads, which may include personalized ads based on your activity. On iOS we request permission through Apple's App Tracking Transparency before any cross-app tracking. In all cases we ask for your explicit consent through an in-app consent dialog before initializing any ad service, and you can change your choice anytime from Settings → Ad Privacy Options. See Meta's privacy policy at www.facebook.com/privacy/policy/.',
+    s9:'Contact Us',
+    p9:'If you have any questions about this privacy policy, contact us at:',
+    email:'support@dietsai.com',
+    updated:'Last updated: March 2026'
+  },
+  zh: {
+    dir:'ltr', lang:'zh', langName:'中文',
+    title:'隐私政策 - Foodsprint',
+    h1:'隐私政策',
+    subtitle:'Foodsprint - AI营养助手',
+    developer:'开发者：Issa Alhilali',
+    s1:'简介',
+    p1:'Foodsprint尊重您的隐私并致力于保护您的个人数据。本政策说明我们在您使用应用程序时如何收集、使用和保护您的信息。',
+    s2:'我们收集的数据',
+    l2:['账户信息：创建账户时的姓名和电子邮件地址。','营养与健康数据：通过应用程序分析的餐食信息、卡路里和营养素。','照片：您拍摄的用于餐食分析的食物图片。','购买数据：订阅和应用内购买信息（通过Apple/Google和RevenueCat处理）。','使用数据：您与应用程序的交互方式，用于改善用户体验。','崩溃数据：匿名技术报告，用于提高应用性能。'],
+    s3:'我们如何使用您的数据',
+    l3:['提供餐食分析和营养服务。','管理您的账户并验证您的身份。','处理订阅和购买。','个性化您的体验并显示您的营养摘要。','改善应用性能并修复错误。'],
+    s4:'数据共享',
+    p4:'我们不出售您的个人数据。我们仅在以下情况下共享您的数据：',
+    l4:['服务提供商：如用于餐食分析的AI服务和用于订阅管理的RevenueCat。','法律要求：在必要时遵守适用法律。'],
+    s5:'数据保护',
+    p5:'我们采用适当的安全措施保护您的数据，包括传输过程中的加密和安全存储。',
+    s6:'您的权利',
+    l6:['请求访问您的个人数据。','请求更正或删除您的数据。','撤回数据处理同意。','删除您的账户及所有相关数据。'],
+    s7:'儿童数据',
+    p7:'本应用不面向13岁以下儿童，我们不会故意收集儿童数据。',
+    s8:'政策变更',
+    p8:'我们可能会不时更新本政策，并将通过应用程序通知您任何重大变更。',
+    s9:'联系我们',
+    p9:'如有任何关于隐私政策的问题，请联系我们：',
+    email:'support@dietsai.com',
+    updated:'最后更新：2026年3月'
+  },
+  fr: {
+    dir:'ltr', lang:'fr', langName:'Français',
+    title:'Politique de Confidentialité - Foodsprint',
+    h1:'Politique de Confidentialité',
+    subtitle:'Foodsprint - Assistant Nutritionnel IA',
+    developer:'Développeur : Issa Alhilali',
+    s1:'Introduction',
+    p1:"Chez Foodsprint, nous respectons votre vie privée et nous nous engageons à protéger vos données personnelles. Cette politique explique comment nous collectons, utilisons et protégeons vos informations.",
+    s2:'Données que nous collectons',
+    l2:["Informations de compte : Nom et adresse e-mail lors de la création du compte.","Données nutritionnelles et de santé : Informations sur les repas, calories et nutriments.","Photos : Images alimentaires pour l'analyse des repas.","Données d'achat : Informations d'abonnement (traitées via Apple/Google et RevenueCat).","Données d'utilisation : Comment vous interagissez avec l'application.","Données de plantage : Rapports techniques anonymes."],
+    s3:'Comment nous utilisons vos données',
+    l3:["Fournir des services d'analyse des repas.","Gérer votre compte.","Traiter les abonnements et achats.","Personnaliser votre expérience.","Améliorer les performances de l'application."],
+    s4:'Partage des données',
+    p4:'Nous ne vendons pas vos données. Nous pouvons les partager uniquement avec :',
+    l4:["Prestataires de services : Services IA et RevenueCat.","Exigences légales : Conformité aux lois applicables."],
+    s5:'Protection des données',
+    p5:'Nous utilisons des mesures de sécurité appropriées, notamment le chiffrement et le stockage sécurisé.',
+    s6:'Vos droits',
+    l6:["Demander l'accès à vos données.","Demander la correction ou suppression de vos données.","Retirer votre consentement.","Supprimer votre compte et toutes les données associées."],
+    s7:'Données des enfants',
+    p7:"Notre application n'est pas destinée aux enfants de moins de 13 ans.",
+    s8:'Modifications de cette politique',
+    p8:'Nous pouvons mettre à jour cette politique et vous informerons des changements importants.',
+    s9:'Nous contacter',
+    p9:'Pour toute question sur cette politique de confidentialité :',
+    email:'support@dietsai.com',
+    updated:'Dernière mise à jour : Mars 2026'
+  },
+  de: {
+    dir:'ltr', lang:'de', langName:'Deutsch',
+    title:'Datenschutzrichtlinie - Foodsprint',
+    h1:'Datenschutzrichtlinie',
+    subtitle:'Foodsprint - KI-Ernährungsassistent',
+    developer:'Entwickler: Issa Alhilali',
+    s1:'Einleitung',
+    p1:'Bei Foodsprint respektieren wir Ihre Privatsphäre und verpflichten uns zum Schutz Ihrer persönlichen Daten.',
+    s2:'Gesammelte Daten',
+    l2:['Kontoinformationen: Name und E-Mail-Adresse.','Ernährungs- und Gesundheitsdaten: Mahlzeitinformationen, Kalorien und Nährstoffe.','Fotos: Lebensmittelbilder zur Mahlzeitanalyse.','Kaufdaten: Abonnement-Informationen (verarbeitet über Apple/Google und RevenueCat).','Nutzungsdaten: Wie Sie mit der App interagieren.','Absturzdaten: Anonyme technische Berichte.'],
+    s3:'Verwendung Ihrer Daten',
+    l3:['Bereitstellung von Mahlzeitanalyse-Diensten.','Verwaltung Ihres Kontos.','Verarbeitung von Abonnements.','Personalisierung Ihrer Erfahrung.','Verbesserung der App-Leistung.'],
+    s4:'Datenweitergabe',
+    p4:'Wir verkaufen Ihre Daten nicht. Wir teilen sie nur mit:',
+    l4:['Dienstanbietern: KI-Dienste und RevenueCat.','Gesetzlichen Anforderungen: Bei Bedarf.'],
+    s5:'Datenschutz',
+    p5:'Wir verwenden geeignete Sicherheitsmaßnahmen einschließlich Verschlüsselung.',
+    s6:'Ihre Rechte',
+    l6:['Zugriff auf Ihre Daten beantragen.','Berichtigung oder Löschung beantragen.','Einwilligung widerrufen.','Konto löschen.'],
+    s7:'Kinderdaten',
+    p7:'Unsere App richtet sich nicht an Kinder unter 13 Jahren.',
+    s8:'Änderungen',
+    p8:'Wir können diese Richtlinie aktualisieren und informieren Sie über wesentliche Änderungen.',
+    s9:'Kontakt',
+    p9:'Bei Fragen zu dieser Datenschutzrichtlinie:',
+    email:'support@dietsai.com',
+    updated:'Zuletzt aktualisiert: März 2026'
+  },
+  es: {
+    dir:'ltr', lang:'es', langName:'Español',
+    title:'Política de Privacidad - Foodsprint',
+    h1:'Política de Privacidad',
+    subtitle:'Foodsprint - Asistente Nutricional IA',
+    developer:'Desarrollador: Issa Alhilali',
+    s1:'Introducción',
+    p1:'En Foodsprint, respetamos su privacidad y nos comprometemos a proteger sus datos personales.',
+    s2:'Datos que recopilamos',
+    l2:['Información de cuenta: Nombre y correo electrónico.','Datos nutricionales: Información de comidas, calorías y nutrientes.','Fotos: Imágenes de alimentos para análisis.','Datos de compra: Información de suscripciones (procesada por Apple/Google y RevenueCat).','Datos de uso: Cómo interactúa con la app.','Datos de fallos: Informes técnicos anónimos.'],
+    s3:'Uso de sus datos',
+    l3:['Proporcionar servicios de análisis nutricional.','Gestionar su cuenta.','Procesar suscripciones.','Personalizar su experiencia.','Mejorar el rendimiento de la app.'],
+    s4:'Compartición de datos',
+    p4:'No vendemos sus datos. Solo los compartimos con:',
+    l4:['Proveedores de servicios: IA y RevenueCat.','Requisitos legales.'],
+    s5:'Protección de datos',
+    p5:'Usamos medidas de seguridad apropiadas, incluyendo cifrado.',
+    s6:'Sus derechos',
+    l6:['Solicitar acceso a sus datos.','Solicitar corrección o eliminación.','Retirar el consentimiento.','Eliminar su cuenta.'],
+    s7:'Datos de menores',
+    p7:'Nuestra app no está destinada a menores de 13 años.',
+    s8:'Cambios en esta política',
+    p8:'Podemos actualizar esta política y le notificaremos los cambios importantes.',
+    s9:'Contáctenos',
+    p9:'Para preguntas sobre esta política:',
+    email:'support@dietsai.com',
+    updated:'Última actualización: Marzo 2026'
+  },
+  pt: {
+    dir:'ltr', lang:'pt', langName:'Português',
+    title:'Política de Privacidade - Foodsprint',
+    h1:'Política de Privacidade',
+    subtitle:'Foodsprint - Assistente Nutricional IA',
+    developer:'Desenvolvedor: Issa Alhilali',
+    s1:'Introdução',
+    p1:'Na Foodsprint, respeitamos sua privacidade e nos comprometemos a proteger seus dados pessoais.',
+    s2:'Dados que coletamos',
+    l2:['Informações da conta: Nome e e-mail.','Dados nutricionais: Informações de refeições, calorias e nutrientes.','Fotos: Imagens de alimentos para análise.','Dados de compra: Informações de assinatura (processadas pela Apple/Google e RevenueCat).','Dados de uso: Como você interage com o app.','Dados de falhas: Relatórios técnicos anônimos.'],
+    s3:'Como usamos seus dados',
+    l3:['Fornecer serviços de análise nutricional.','Gerenciar sua conta.','Processar assinaturas.','Personalizar sua experiência.','Melhorar o desempenho do app.'],
+    s4:'Compartilhamento de dados',
+    p4:'Não vendemos seus dados. Podemos compartilhá-los apenas com:',
+    l4:['Provedores de serviços: IA e RevenueCat.','Requisitos legais.'],
+    s5:'Proteção de dados',
+    p5:'Usamos medidas de segurança apropriadas, incluindo criptografia.',
+    s6:'Seus direitos',
+    l6:['Solicitar acesso aos seus dados.','Solicitar correção ou exclusão.','Retirar consentimento.','Excluir sua conta.'],
+    s7:'Dados de crianças',
+    p7:'Nosso app não é destinado a crianças menores de 13 anos.',
+    s8:'Alterações nesta política',
+    p8
